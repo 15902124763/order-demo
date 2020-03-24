@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yarm.dao.OrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.yarm.pojo.OrderItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_list_no" property="orderListNo" jdbcType="VARCHAR" />
+    <result column="order_item_no" property="orderItemNo" jdbcType="VARCHAR" />
+    <result column="order_list_price" property="orderListPrice" jdbcType="DECIMAL" />
+    <result column="order_item_price" property="orderItemPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_list_no, order_item_no, order_list_price, order_item_price
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_order_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yarm.pojo.OrderItem" >
+    insert into t_order_item (id, order_list_no, order_item_no, 
+      order_list_price, order_item_price)
+    values (#{id,jdbcType=INTEGER}, #{orderListNo,jdbcType=VARCHAR}, #{orderItemNo,jdbcType=VARCHAR}, 
+      #{orderListPrice,jdbcType=DECIMAL}, #{orderItemPrice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yarm.pojo.OrderItem" >
+    insert into t_order_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderListNo != null" >
+        order_list_no,
+      </if>
+      <if test="orderItemNo != null" >
+        order_item_no,
+      </if>
+      <if test="orderListPrice != null" >
+        order_list_price,
+      </if>
+      <if test="orderItemPrice != null" >
+        order_item_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderListNo != null" >
+        #{orderListNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemNo != null" >
+        #{orderItemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderListPrice != null" >
+        #{orderListPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderItemPrice != null" >
+        #{orderItemPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yarm.pojo.OrderItem" >
+    update t_order_item
+    <set >
+      <if test="orderListNo != null" >
+        order_list_no = #{orderListNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderItemNo != null" >
+        order_item_no = #{orderItemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderListPrice != null" >
+        order_list_price = #{orderListPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderItemPrice != null" >
+        order_item_price = #{orderItemPrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yarm.pojo.OrderItem" >
+    update t_order_item
+    set order_list_no = #{orderListNo,jdbcType=VARCHAR},
+      order_item_no = #{orderItemNo,jdbcType=VARCHAR},
+      order_list_price = #{orderListPrice,jdbcType=DECIMAL},
+      order_item_price = #{orderItemPrice,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
