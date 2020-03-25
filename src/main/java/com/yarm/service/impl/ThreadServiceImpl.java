@@ -6,9 +6,10 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ThreadServiceImpl implements ThreadService {
@@ -25,7 +26,7 @@ public class ThreadServiceImpl implements ThreadService {
                 new LinkedBlockingQueue<Runnable>());
 
         // 启动几个线程
-        for (int i = 0; i < 10000 ; i++){
+        for (int i = 0; i < 10 ; i++){
             executorService.execute(new Runnable() {
                 @Override
                 public void run() {

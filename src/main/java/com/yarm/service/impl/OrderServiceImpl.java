@@ -57,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void fechInsert() {
-        for (int i = 0; i < 100 ;i++){
+        for (int i = 0; i < 1000 ;i++){
             this.insert();
         }
     }
